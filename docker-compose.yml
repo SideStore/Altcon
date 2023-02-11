@@ -1,0 +1,34 @@
+version: '3.7'
+services:
+  anisette:
+    image: dadoum/anisette-server:latest
+    volumes:
+      - lib_cache:/opt/lib/
+    ports:
+      - 6969:6969
+    restart: always
+    container_name: anisette
+    networks:
+      - joelle
+
+  altcon:
+    image: macley/altcon:latest
+    volumes:
+      - /var/lib/lockdown:/var/lib/lockdown
+      - /var/run:/var/run
+    container_name: altcon
+    networks:
+      - joelle
+    environment:
+      ALTSERVER_ANISETTE_SERVER: "http://anisette:6969"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - anisette
+
+volumes:
+  lib_cache:
+
+networks:
+  joelle:
+    name: joelle_net

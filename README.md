@@ -17,10 +17,8 @@ You'll be able to use only one command to get a fully working environment to ins
 If you wish to only run altcon (excluding anisette), then run:
 
 ```bash
-docker run --rm -it -e ALTSERVER_ANISETTE_SERVER="http://your.anisette.server.ip:6969" -v /dev/bus/usb:/dev/bus/usb -v /var/lib/lockdown:/var/lib/lockdown -v /var/run:/var/run -v /sys/fs/cgroup:/sys/fs/cgroup:ro --privileged macley/altcon
+docker run --rm -it -e ALTSERVER_ANISETTE_SERVER="http://your.anisette.server.ip:6969" -v /var/lib/lockdown:/var/lib/lockdown -v /var/run:/var/run macley/altcon
 ```
-
-Note that the above command isn't optimized yet. This means that not all volume mounts may be needed or even privileged itself. Will experiment to futher reduce giving permission to the container.
 
 ### How it works
 

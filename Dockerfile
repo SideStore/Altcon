@@ -11,7 +11,7 @@ COPY . .
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN ./get-altserver-linux.sh && \
-    curl -L -o SideStore.ipa $(curl -s https://api.github.com/repos/SideStore/SideStore/releases/latest | grep "browser_download_url.*SideStore*" | cut -d : -f 2,3 | tr -d \")
+    curl -sL -o SideStore.ipa $(curl -s https://api.github.com/repos/SideStore/SideStore/releases/latest | grep "browser_download_url.*SideStore*" | cut -d : -f 2,3 | tr -d \")
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
 

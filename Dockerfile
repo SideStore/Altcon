@@ -1,8 +1,5 @@
 FROM debian:unstable-slim
 
-# Debug armv7 build
-RUN uname -m
-
 RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates usbmuxd libimobiledevice6 libimobiledevice-utils libavahi-compat-libdnssd-dev curl wget && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/ && \

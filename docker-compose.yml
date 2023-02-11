@@ -14,7 +14,6 @@ services:
   altcon:
     image: macley/altcon:latest
     volumes:
-      - /var/lib/lockdown:/var/lib/lockdown
       - /var/run:/var/run
     container_name: altcon
     networks:

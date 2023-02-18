@@ -9,5 +9,5 @@ fi
 chmod +x AltServer
 
 # Get SideStore Stable and Nightly
-curl -sL -o SideStore.ipa $(curl -s https://github.com/SideStore/SideStore/releases/latest/download/SideStore.ipa)
-curl -sL -o SideStore-Nightly.ipa $(curl -s https://github.com/SideStore/SideStore/releases/download/auto-update-test/SideStore.ipa)
+curl -sL -o SideStore.ipa https://github.com/SideStore/SideStore/releases/latest/download/SideStore.ipa
+curl -sL -o SideStore-Nightly.ipa https://github.com/SideStore/SideStore/releases/download/auto-update-test/SideStore.ipa

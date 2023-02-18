@@ -24,6 +24,6 @@ echo -e "\nTo install an IPA, run the following command and change \033[0;31mmye
 echo -e "./AltServer -u \033[0;32m${udid}\033[0m -a \033[0;31mmyemail@mail.com\033[0m -p \033[0;31mmyapplepass\033[0m SideStore.ipa\n"
 printf "Use this host IP address with port 6969 as your custom anisette server. This will ensure SideStore/AltStore will let you sign in\n"
 printf "Once you're finished, type exit to exit the container you're now in.\n"
-printf "===================================================================================================================\n"
+printf "================================================================================================================================\n"
 
 /bin/bash

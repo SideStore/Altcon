@@ -10,8 +10,7 @@ WORKDIR /app/
 COPY . .
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN ./get-altserver-linux.sh && \
-    curl -sL -o SideStore.ipa $(curl -s https://api.github.com/repos/SideStore/SideStore/releases/latest | grep "browser_download_url.*SideStore*" | cut -d : -f 2,3 | tr -d \")
+RUN ./get-files.sh
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
 

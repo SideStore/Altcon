@@ -10,7 +10,6 @@ WORKDIR /app/
 COPY . .
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN ./get-files.sh
+RUN ./get-altserver.sh
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
-

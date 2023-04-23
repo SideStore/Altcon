@@ -10,7 +10,13 @@ The only thing that isn't included in this container is the ability to wifi refr
 
 ## How to run Altcon only
 
-If you wish to only run Altcon (excluding anisette), then run:
+First install the needed dependency:
+
+```bash
+sudo apt install -y usbmuxd
+```
+
+To run Altcon itself:
 
 ```bash
 docker run --rm -it -e ALTSERVER_ANISETTE_SERVER="http://your.anisette.server.ip:6969" -v /var/run:/var/run macley/altcon
@@ -32,6 +38,7 @@ The following will download the docker-compose file with all the details specifi
 After that, the docker-compose command will run and remove the altcon container. Because anisette is a dependency, it will startup aswell and will continue to run in the background (even after exitting Altcon).
 
 ```bash
+sudo apt install -y usbmuxd
 wget https://raw.githubusercontent.com/Macleykun/Altcon/main/docker-compose.yml
 docker-compose run --rm altcon
 ```

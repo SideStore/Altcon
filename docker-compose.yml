@@ -4,9 +4,6 @@ services:
     image: dadoum/anisette-server:latest
     volumes:
       - lib_cache:/opt/lib/
-    ports:
-      - 6969:6969
-    restart: always
     container_name: anisette
     networks:
       - joelle

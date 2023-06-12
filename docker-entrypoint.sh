@@ -15,7 +15,6 @@ curl -sL -o SideStore-Nightly.ipa https://github.com/SideStore/SideStore/release
 udid=$(idevice_id | awk '{print $1}')
 echo -e "\nTo install an IPA, run the following command and change \033[0;31mmyemail\033[0m and \033[0;31mmyapplepass\033[0m. The \033[0;32mUDID\033[0m is already correct:"
 echo -e "./AltServer -u \033[0;32m${udid}\033[0m -a \033[0;31mmyemail@mail.com\033[0m -p \033[0;31mmyapplepass\033[0m SideStore-Nightly.ipa\n"
-printf "Use this host IP address with port 6969 as your custom anisette server. This will ensure SideStore/AltStore will let you sign in\n"
 printf "Once you're finished, type exit to exit the container you're now in.\n"
 printf "================================================================================================================================\n"
 

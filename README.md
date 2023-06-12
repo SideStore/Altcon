@@ -25,7 +25,7 @@ docker run --rm -it -e ALTSERVER_ANISETTE_SERVER="http://your.anisette.server.ip
 ### How it works
 
 The container will try to pair with your iDevice, just plug it in and enter your pin. After the pairing is successful, you'll be brough into the terminal within the container. Then you'll only need to run the command and adjust the apple account to the one of your choosing.
-I do advice to create a secondairy account (make sure it's logged into an idevice, so you can recieve the 2FA code).
+I do advice to [create a secondairy account](https://wiki.sidestore.io/guides/create-account.html#create-an-apple-id-account-itunes-method--no-mfa).
 After you're done, you can type exit and the container will be removed.
 
 ## Altcon+anisette
@@ -41,6 +41,7 @@ After that, the docker-compose command will run and remove the altcon container.
 sudo apt install -y usbmuxd
 wget https://raw.githubusercontent.com/Macleykun/Altcon/main/docker-compose.yml
 docker-compose run --rm altcon
+docker stop anisette && docker rm anisette
 ```
 
 ## Problem with the pairing file

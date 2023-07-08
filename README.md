@@ -7,6 +7,7 @@ Because all of this is in a container, you also don't leave anything on the host
 ~~The pairing file you'll need for Sidestore is available in `/var/lib/lockdown/*.plist` (on your host system).~~
 
 The only thing that isn't included in this container is the ability to wifi refresh with AltServer-linux. However because Sidestore doesn't need this, i don't see the need to include this.
+I helped Powenn once where he couldn't get wifi refresh to work. Make sure to instal in that case avahi-daemon and make sure it's enabled and running. This is unrelated to Altcon.
 
 ## How to run Altcon only
 

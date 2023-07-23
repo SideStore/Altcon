@@ -6,16 +6,23 @@ while ! idevicepair pair; do
   sleep 1s
 done
 
-# Show what we download, we get both to leave the choice to the user and we now always have the latest
-echo -e "\ncurl -sL -o SideStore.ipa $(curl -s https://api.github.com/repos/SideStore/SideStore/releases/latest | grep "browser_download_url.*SideStore.ipa*" | cut -d : -f 2,3 | tr -d \")"
-curl -sL -o SideStore.ipa $(curl -s https://api.github.com/repos/SideStore/SideStore/releases/latest | grep "browser_download_url.*SideStore.ipa*" | cut -d : -f 2,3 | tr -d \")
-echo -e "\ncurl -sL -o SideStore-Nightly.ipa https://github.com/SideStore/SideStore/releases/download/nightly/SideStore.ipa"
-curl -sL -o SideStore-Nightly.ipa https://github.com/SideStore/SideStore/releases/download/nightly/SideStore.ipa
+# Get SideStore ipa
+printf "\nDownloading SideStore.ipa stable.\n"
+printf "=================================\n"
+curl --progress-bar -L -o SideStore.ipa $(curl -s https://api.github.com/repos/SideStore/SideStore/releases/latest | grep "browser_download_url.*SideStore.ipa*" | cut -d : -f 2,3 | tr -d \")
 
+# Generate mobiledevicepairing file
+printf "\nGenerating mobiledevicepairing file for SideStore"
+printf "===============================================================\n"
+./jitterbugpair
+
+# Get udid
 udid=$(idevice_id | awk '{print $1}')
 echo -e "\nTo install an IPA, run the following command and change \033[0;31mmyemail\033[0m and \033[0;31mmyapplepass\033[0m. The \033[0;32mUDID\033[0m is already correct:"
-echo -e "./AltServer -u \033[0;32m${udid}\033[0m -a \033[0;31mmyemail@mail.com\033[0m -p \033[0;31mmyapplepass\033[0m SideStore-Nightly.ipa\n"
-printf "Once you're finished, type exit to exit the container you're now in.\n"
-printf "================================================================================================================================\n"
+printf "=============================================================================================================\n"
+
+echo -e "./AltServer -u \033[0;32m${udid}\033[0m -a \033[0;31mmyemail@mail.com\033[0m -p \033[0;31mmyapplepass\033[0m SideStore.ipa\n"
+echo -e "Once you're finished, type: \033[0;35mexit\033[0m."
+printf "====================================================================\n\n"
 
 /bin/bash

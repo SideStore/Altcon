@@ -16,7 +16,7 @@ You will see your pairingfile in your home directory (ends with .mobiledevicepai
 
 ## Altcon+anisette
 
-As of writing I host two anisette servers for the public, whilst you can use these to authenticate in the container and iDevice. I do advice you to run your own instance locally to minimze any potentional errors. Therefore i've created a docker-compose file to setup Anisette and Altcon with one single command. Anisettte will continue to run in the background so you can use the IP of the host to authenticate on your iDevice aswell. You no longer need to set the environment variable either, as this is done for you.
+As of writing I host two anisette servers for the public, whilst you can use these to authenticate in the container and iDevice. I do advice you to run your own instance locally to minimze any potentional errors. Therefore i've created a docker-compose file to setup Anisette and Altcon with one single command. Anisettte will continue to run in the background so you can use the IP of the host to authenticate on your iDevice aswell if your using AltStore. You no longer need to set the environment variable either, as this is done for you.
 
 ### How to run Altcon+anisette
 
@@ -30,7 +30,6 @@ sudo sh test-docker.sh
 apt install -y docker-compose
 wget https://raw.githubusercontent.com/Macleykun/Altcon/main/docker-compose.yml # Up to here are dependencies, if you like to re-run altcon start from the next line
 docker-compose run --rm altcon
-docker stop anisette && docker rm anisette
 ```
 
 ## How to run Altcon only

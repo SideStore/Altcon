@@ -12,7 +12,7 @@ services:
     image: macley/altcon:latest
     volumes:
       - /var/run:/var/run
-      - /mnt/:${PWD}/
+      - ${PWD}/:/mnt/
     container_name: altcon
     networks:
       - joelle

@@ -12,7 +12,7 @@ printf "=================================\n"
 curl --progress-bar -L -o SideStore.ipa $(curl -s https://api.github.com/repos/SideStore/SideStore/releases/latest | grep "browser_download_url.*SideStore.ipa*" | cut -d : -f 2,3 | tr -d \")
 
 # Generate mobiledevicepairing file
-printf "\nGenerating mobiledevicepairing file for SideStore"
+printf "\nGenerating mobiledevicepairing file for SideStore\n"
 printf "===============================================================\n"
 ./jitterbugpair
 

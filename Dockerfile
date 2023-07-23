@@ -7,11 +7,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends unzip ca-certif
 
 WORKDIR /app/
 
-COPY get-altserver.sh .
+COPY get-latest-files.sh .
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN ./get-altserver.sh && \
-    rm get-altserver.sh
+RUN ./get-latest-files.sh && \
+    rm get-latest-files.sh
 
 COPY docker-entrypoint.sh .
 

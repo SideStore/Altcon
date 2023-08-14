@@ -1,5 +1,5 @@
 FROM debian:bookworm-slim
- 
+
 RUN apt-get update && apt-get install -y --no-install-recommends unzip ca-certificates usbmuxd libimobiledevice6 libimobiledevice-utils libavahi-compat-libdnssd-dev curl && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/ && \

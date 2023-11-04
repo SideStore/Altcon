@@ -9,7 +9,7 @@ You'll find your pairing file in the current directory when you leave the Altcon
 ## How it works
 
 The container will try to pair with your iDevice, just plug it in and enter your pin. After the pairing is successful, you'll be brought into the terminal within the container. Then you'll only need to run the command and adjust the apple account to the one of your choosing.
-I do advice to [create a secondairy account](https://wiki.sidestore.io/guides/create-account.html#create-an-apple-id-account-itunes-method--no-mfa).
+I do advice to [create a secondairy account](https://wiki.sidestore.io/guides/burner-apple-id/#create-an-apple-id-account-using-itunes--no-mfa).
 After you're done, you can type exit and the container will be removed.
 You will see your pairingfile in your home directory (ends with .mobiledevicepairing). Copy this to your iDevice using mail/whatever so you can import it into SideStore.
 

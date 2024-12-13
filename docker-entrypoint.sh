@@ -30,4 +30,4 @@ echo -e "./AltServer -u \033[0;32m${udid}\033[0m -a \033[0;31mmyemail@mail.com\0
 echo -e "Once you're finished, type: \033[0;35mexit\033[0m."
 printf "=================================\n\n"
 
-/bin/bash
+/bin/sh

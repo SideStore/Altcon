@@ -30,8 +30,6 @@ echo -e "./AltServer -u \033[0;32m${udid}\033[0m -a \033[0;31mmyemail@mail.com\0
 echo -e "\nDo note that if your password contains special characters like '@','$' '!'or a space."
 echo "It may not work and you need to put backslashes before it"
 echo "For example, if your password is 'azerty79!?', you need to write 'azerty79\!\?'"
-echo "You can type in: 'sh' and then the command above which may or may not work for your password."
-echo "But using arrow keys and tab completion won't work, so only copy, paste and enter works."
 printf "=============================================================================================\n"
 echo -e "\nOnce you're finished, type: \033[0;35mexit\033[0m."
 printf "=================================\n\n"

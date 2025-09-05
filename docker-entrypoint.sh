@@ -19,10 +19,17 @@ curl --progress-bar -L -o SideStore-Nightly.ipa https://github.com/SideStore/Sid
 # Get udid
 udid=$(idevice_id | awk '{print $1}')
 
-# Generate mobiledevicepairing file
-printf "\nGenerating mobiledevicepairing file for SideStore\n"
-printf "===============================================================\n"
-./jitterbugpair -c > /mnt/${udid}.mobiledevicepairing && echo "Check your home folder on your host/after your exit, and copy the ${udid}.mobiledevicepairing file to your iDevice."
+# Generate mobiledevicepairing file if we're invalid!
+idevicepair validate -u ${udid}
+if [[ $? -neq 0 ]]; then
+  printf "\nGenerating new mobiledevicepairing file for SideStore\n"
+  printf "===============================================================\n"
+  ./jitterbugpair -c > /mnt/${udid}.mobiledevicepairing && echo "Check your home folder on your host/after your exit, and copy the ${udid}.mobiledevicepairing file to your iDevice."
+else
+  printf "\nUsing existing mobiledevicepairing file for SideStore\n"
+  printf "===============================================================\n"
+  cp /tmp/lockdown/${udid}.plist /mnt/${udid}.mobiledevicepairing
+fi
 
 echo -e "\nTo install an IPA, run the following command and change \033[0;31mmyemail\033[0m and \033[0;31mmyapplepass\033[0m. The \033[0;32mUDID\033[0m is already correct:"
 printf "=============================================================================================================\n"

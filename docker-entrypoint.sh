@@ -5,6 +5,32 @@ printf "=============================================\n"
 while ! idevicepair pair; do
   sleep 1s
 done
+echo
+
+# Get udid
+udid=$(idevice_id | awk '{print $1}')
+
+# Generate mobiledevicepairing file if we're invalid!
+if idevicepair validate -u ${udid}; then
+  printf "\nCopying mobiledevicepairing file for SideStore to current directory on host machine.\n"
+  printf "====================================================================================\n"
+  cp --verbose /tmp/lockdown/${udid}.plist /mnt/${udid}.mobiledevicepairing
+
+  # Add UDID key so mobiledevicepairingfile generated file is the exepected format jitterbugpair does which SideStore needs
+  if ! grep -q "<key>UDID</key>" "/tmp/lockdown/${udid}.plist"; then
+      sed -i "/<\/dict>/ i\\
+        <key>UDID</key>\\
+        <string>$udid</string>" "/tmp/lockdown/${udid}.plist"
+  fi
+
+  cp /tmp/lockdown/${udid}.plist /mnt/${udid}.mobiledevicepairing
+else
+  printf "\nGenerating new mobiledevicepairing file for SideStore\n"
+  printf "===============================================================\n"
+  ./jitterbugpair -c > /mnt/${udid}.mobiledevicepairing && echo "Check your home folder on your host/after your exit, and copy the ${udid}.mobiledevicepairing file to your iDevice."
+
+  echo notok
+fi
 
 # Get SideStore ipa
 printf "\nDownloading SideStore.ipa stable.\n"
@@ -13,23 +39,8 @@ curl --progress-bar -L -o SideStore.ipa $(curl -s https://api.github.com/repos/S
 
 # Get SideStore-Nightly ipa
 printf "\nDownloading SideStore.ipa nightly.\n"
-printf "=================================\n"
+printf "==================================\n"
 curl --progress-bar -L -o SideStore-Nightly.ipa https://github.com/SideStore/SideStore/releases/download/nightly/SideStore.ipa
-
-# Get udid
-udid=$(idevice_id | awk '{print $1}')
-
-# Generate mobiledevicepairing file if we're invalid!
-idevicepair validate -u ${udid}
-if [[ $? -neq 0 ]]; then
-  printf "\nGenerating new mobiledevicepairing file for SideStore\n"
-  printf "===============================================================\n"
-  ./jitterbugpair -c > /mnt/${udid}.mobiledevicepairing && echo "Check your home folder on your host/after your exit, and copy the ${udid}.mobiledevicepairing file to your iDevice."
-else
-  printf "\nUsing existing mobiledevicepairing file for SideStore\n"
-  printf "===============================================================\n"
-  cp /tmp/lockdown/${udid}.plist /mnt/${udid}.mobiledevicepairing
-fi
 
 echo -e "\nTo install an IPA, run the following command and change \033[0;31mmyemail\033[0m and \033[0;31mmyapplepass\033[0m. The \033[0;32mUDID\033[0m is already correct:"
 printf "=============================================================================================================\n"
@@ -37,8 +48,6 @@ echo -e "./AltServer -u \033[0;32m${udid}\033[0m -a \033[0;31mmyemail@mail.com\0
 echo -e "\nDo note that if your password contains special characters like '@','$' '!'or a space."
 echo "It may not work and you need to put backslashes before it"
 echo "For example, if your password is 'azerty79!?', you need to write 'azerty79\!\?'"
-printf "=============================================================================================\n"
+printf "=====================================================================================\n"
 echo -e "\nOnce you're finished, type: \033[0;35mexit\033[0m."
 printf "=================================\n\n"
-
-/bin/bash

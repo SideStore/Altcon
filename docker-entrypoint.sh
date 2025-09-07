@@ -24,8 +24,8 @@ printf "\nCopying mobiledevicepairing file for SideStore to current directory on
 printf "====================================================================================\n"
 if ! grep -q "<key>UDID</key>" "/tmp/lockdown/${udid}.plist"; then
     sed -i "/<\/dict>/ i\\
-        <key>UDID</key>\\
-        <string>$udid</string>" "/tmp/lockdown/${udid}.plist"
+      <key>UDID</key>\\
+      <string>$udid</string>" "/tmp/lockdown/${udid}.plist"
 fi
 cp --verbose /tmp/lockdown/${udid}.plist /mnt/${udid}.mobiledevicepairing
 

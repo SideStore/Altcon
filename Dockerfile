@@ -2,7 +2,7 @@ FROM debian:trixie-slim
 
 ENV ALTSERVER_ANISETTE_SERVER="https://ani.sidestore.io/"
 
-RUN apt-get update && apt-get install -y --no-install-recommends unzip ca-certificates usbmuxd libimobiledevice-1.0-6 libimobiledevice-utils libavahi-compat-libdnssd-dev curl && \
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates usbmuxd libimobiledevice-1.0-6 libimobiledevice-utils libavahi-compat-libdnssd-dev curl && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/ && \
     mkdir app

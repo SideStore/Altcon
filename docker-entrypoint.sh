@@ -5,40 +5,26 @@ printf "=============================================\n"
 while ! idevicepair pair; do
   sleep 1s
 done
-echo
 
 # Get udid
 udid=$(idevice_id | awk '{print $1}')
 
-# Generate mobiledevicepairing file if we're invalid!
-if idevicepair validate -u ${udid}; then
-  printf "\nCopying mobiledevicepairing file for SideStore to current directory on host machine.\n"
-  printf "====================================================================================\n"
-  cp --verbose /tmp/lockdown/${udid}.plist /mnt/${udid}.mobiledevicepairing
-
-  # Add UDID key so mobiledevicepairingfile generated file is the exepected format jitterbugpair does which SideStore needs
-  if ! grep -q "<key>UDID</key>" "/tmp/lockdown/${udid}.plist"; then
-      sed -i "/<\/dict>/ i\\
+printf "\nCopying mobiledevicepairing file for SideStore to current directory on host machine.\n"
+printf "====================================================================================\n"
+if ! grep -q "<key>UDID</key>" "/tmp/lockdown/${udid}.plist"; then
+    sed -i "/<\/dict>/ i\\
         <key>UDID</key>\\
         <string>$udid</string>" "/tmp/lockdown/${udid}.plist"
-  fi
-
-  cp /tmp/lockdown/${udid}.plist /mnt/${udid}.mobiledevicepairing
-else
-  printf "\nGenerating new mobiledevicepairing file for SideStore\n"
-  printf "===============================================================\n"
-  ./jitterbugpair -c > /mnt/${udid}.mobiledevicepairing && echo "Check your home folder on your host/after your exit, and copy the ${udid}.mobiledevicepairing file to your iDevice."
-
-  echo notok
 fi
+cp --verbose /tmp/lockdown/${udid}.plist /mnt/${udid}.mobiledevicepairing
 
 # Get SideStore ipa
-printf "\nDownloading SideStore.ipa stable.\n"
-printf "=================================\n"
+printf "\nDownloading SideStore.ipa.\n"
+printf "==========================\n"
 curl --progress-bar -L -o SideStore.ipa $(curl -s https://api.github.com/repos/SideStore/SideStore/releases/latest | grep "browser_download_url.*SideStore.ipa*" | cut -d : -f 2,3 | tr -d \")
 
 # Get SideStore-Nightly ipa
-printf "\nDownloading SideStore.ipa nightly.\n"
+printf "\nDownloading SideStore-Nightly.ipa.\n"
 printf "==================================\n"
 curl --progress-bar -L -o SideStore-Nightly.ipa https://github.com/SideStore/SideStore/releases/download/nightly/SideStore.ipa
 
@@ -51,3 +37,5 @@ echo "For example, if your password is 'azerty79!?', you need to write 'azerty79
 printf "=====================================================================================\n"
 echo -e "\nOnce you're finished, type: \033[0;35mexit\033[0m."
 printf "=================================\n\n"
+
+/bin/bash
